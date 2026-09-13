@@ -130,7 +130,7 @@ export default function LabHomePage() {
   async function callProtectedApi() {
     const token = flow.access_token;
     const reqText = `GET /api/profile\nAuthorization: Bearer ${
-      token ? `${token.slice(0, 24)}…` : "(none)"
+      token ?? "(none)"
     }`;
     if (!token) {
       setApiDemo({
