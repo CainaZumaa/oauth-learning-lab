@@ -86,6 +86,10 @@ const en = {
     publicNote:
       "This Client is public (PKCE). client_secret belongs only on confidential servers.",
     empty: "(empty)",
+    openValue: "Click to view full value",
+    copy: "Copy",
+    copied: "Copied",
+    close: "Close",
   },
   scopes: {
     title: "Scopes",

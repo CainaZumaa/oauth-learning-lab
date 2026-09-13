@@ -88,6 +88,10 @@ const pt: Dictionary = {
     publicNote:
       "Este Client é public (PKCE). client_secret só em servidores confidential.",
     empty: "(vazio)",
+    openValue: "Clique para ver o valor completo",
+    copy: "Copiar",
+    copied: "Copiado",
+    close: "Fechar",
   },
   scopes: {
     title: "Scopes",

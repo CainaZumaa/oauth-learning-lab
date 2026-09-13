@@ -90,9 +90,7 @@ function AuthorizeForm() {
             <div>
               <span className="text-(--text-muted)">code_challenge</span>
               <div className="break-all font-mono text-[11px]">
-                {params.code_challenge
-                  ? `${params.code_challenge.slice(0, 40)}…`
-                  : "(missing)"}
+                {params.code_challenge || "(missing)"}
               </div>
             </div>
           </div>

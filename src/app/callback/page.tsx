@@ -135,7 +135,7 @@ function CallbackInner() {
                 <p className="text-(--text-secondary)">{message}</p>
               )}
               {tokens && (
-                <pre className="max-h-56 max-w-full overflow-auto whitespace-pre-wrap break-all bg-(--surface-muted) p-2 font-mono text-[11px]">
+                <pre className="max-w-full whitespace-pre-wrap break-all bg-(--surface-muted) p-2 font-mono text-[11px]">
                   {JSON.stringify(tokens, null, 2)}
                 </pre>
               )}
