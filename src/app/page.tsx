@@ -11,6 +11,7 @@ import {
   SecurityTestsPanel,
   type TestResult,
 } from "@/components/SecurityTestsPanel";
+import { ResultToast } from "@/components/ResultToast";
 import { useI18n } from "@/i18n/I18nProvider";
 import { LAB_CONFIG, type Scope } from "@/lib/config";
 import {
@@ -203,23 +204,6 @@ export default function LabHomePage() {
                 </button>
               </div>
 
-              {testResult && (
-                <div
-                  className={`rounded-[var(--radius)] border px-2.5 py-1.5 text-[13px] ${
-                    testResult.status === "REJECTED" ||
-                    testResult.status === "401"
-                      ? "border-[var(--err-border)] bg-[var(--err-bg)] text-[var(--err)]"
-                      : testResult.status === "ACCEPTED"
-                        ? "border-[var(--ok-border)] bg-[var(--ok-bg)] text-[var(--ok)]"
-                        : "border-[var(--info-border)] bg-[var(--info-bg)] text-[var(--info)]"
-                  }`}
-                >
-                  <span className="font-semibold">{testResult.status}</span>
-                  {" — "}
-                  {testResult.reason}
-                </div>
-              )}
-
               {apiDemo && (
                 <div className="panel grid gap-2 p-2 md:grid-cols-2">
                   <div className="min-w-0 text-left">
@@ -315,6 +299,11 @@ export default function LabHomePage() {
           onClearLogs={clearLogs}
         />
       </div>
+
+      <ResultToast
+        result={testResult}
+        onDismiss={() => setTestResult(null)}
+      />
     </main>
   );
 }

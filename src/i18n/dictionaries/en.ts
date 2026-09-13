@@ -236,15 +236,17 @@ const en = {
     controlsTitle: "Where security controls live",
     clientsTitle: "Public vs Confidential Client",
     publicClient:
-      "Public (this lab): no client_secret in the browser — uses PKCE.",
+      "Public (this lab): no client_secret in the browser. Uses PKCE. Examples: SPA, mobile app (a React frontend, Expo app).",
     confidentialClient:
-      "Confidential: client_secret only on a trusted server — never in the frontend.",
+      "Confidential: client_secret only on a trusted server. Never in the frontend. Examples: backend API, Next.js server routes, Rails.",
     singleUse: "authorization_code → single use → reuse REJECTED",
     redirectExact:
       "redirect_uri → exact match with registered URI → mismatch REJECTED",
     singleUseTitle: "authorization_code — single use",
     redirectTitle: "redirect_uri — exact match",
     hoverHint: "Hover boxes and arrows for a deeper explanation",
+    flowExamples:
+      "Real-world mental model: you (Resource Owner) authorize Canva/Notion (Client) via Google/GitHub (AS) to call Drive/GitHub API (RS).",
     fileHint: "Also in the repo: docs/architecture.md",
   },
 };

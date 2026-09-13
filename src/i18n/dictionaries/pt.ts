@@ -237,15 +237,17 @@ const pt: Dictionary = {
     controlsTitle: "Onde estão os controles de segurança",
     clientsTitle: "Public vs Confidential Client",
     publicClient:
-      "Public (este lab): sem client_secret no browser — usa PKCE.",
+      "Public (este lab): sem client_secret no browser. Usa PKCE. Exemplos: SPA, app mobile (frontend React, Expo).",
     confidentialClient:
-      "Confidential: client_secret só em servidor confiável — nunca no frontend.",
+      "Confidential: client_secret só em servidor confiável. Nunca no frontend. Exemplos: API backend, rotas server do Next.js, Rails.",
     singleUse: "authorization_code → uso único → reuso REJECTED",
     redirectExact:
       "redirect_uri → match exato com URI registrada → mismatch REJECTED",
     singleUseTitle: "authorization_code — uso único",
     redirectTitle: "redirect_uri — match exato",
     hoverHint: "Passe o mouse nas caixas e nas setas para ver a explicação",
+    flowExamples:
+      "Modelo mental: você (Resource Owner) autoriza Canva/Notion (Client) via Google/GitHub (AS) para chamar Drive/GitHub API (RS).",
     fileHint: "Também no repositório: docs/architecture.md",
   },
 };

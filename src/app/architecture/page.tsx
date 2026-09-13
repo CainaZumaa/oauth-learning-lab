@@ -25,10 +25,12 @@ function InteractiveRoles({
     id,
     title,
     sub,
+    example,
   }: {
     id: string;
     title: string;
     sub: string;
+    example: string;
   }) {
     return (
       <button
@@ -39,6 +41,7 @@ function InteractiveRoles({
       >
         <strong>{title}</strong>
         <span>{sub}</span>
+        <em className="arch-flow-example">{example}</em>
       </button>
     );
   }
@@ -74,11 +77,13 @@ function InteractiveRoles({
             id="ro"
             title="Resource Owner"
             sub="User · alice@example.local"
+            example="ex.: you authorizing an app"
           />
           <Box
             id="client"
             title="Client"
             sub="Public + PKCE · lab-client · /callback"
+            example="ex.: SPA / mobile app (Canva, Notion)"
           />
         </div>
 
@@ -88,6 +93,7 @@ function InteractiveRoles({
           id="as"
           title="Authorization Server (AS)"
           sub="Identity Provider · /authorize · /token"
+          example="ex.: Google Accounts, GitHub, Auth0"
         />
 
         <Edge id="edge-consent" label="2 · Resource Owner · consent / login" />
@@ -99,6 +105,7 @@ function InteractiveRoles({
           id="rs"
           title="Resource Server (RS)"
           sub="Protected API · GET /api/profile"
+          example="ex.: Google Drive API, GitHub API"
         />
       </div>
 
@@ -218,10 +225,10 @@ export default function ArchitecturePage() {
 
   const rolesChart = `flowchart TB
   subgraph roles["OAuth 2.0 Roles"]
-    RO["Resource Owner<br/>User: alice@example.local"]
-    CL["Client<br/>Public Client + PKCE<br/>Web UI /callback"]
-    AS["Authorization Server AS<br/>Identity Provider<br/>/authorize · /api/authorize · /api/token"]
-    RS["Resource Server RS<br/>Protected API<br/>GET /api/profile"]
+    RO["Resource Owner<br/>User: alice@example.local<br/><i>ex.: you authorizing an app</i>"]
+    CL["Client<br/>Public Client + PKCE<br/>Web UI /callback<br/><i>ex.: SPA / mobile (Canva, Notion)</i>"]
+    AS["Authorization Server AS<br/>Identity Provider<br/>/authorize · /api/authorize · /api/token<br/><i>ex.: Google, GitHub, Auth0</i>"]
+    RS["Resource Server RS<br/>Protected API<br/>GET /api/profile<br/><i>ex.: Drive API, GitHub API</i>"]
   end
   RO -->|"authenticates / consents"| AS
   CL -->|"Authorization Request + code_challenge"| AS
@@ -231,10 +238,10 @@ export default function ArchitecturePage() {
   CL -->|"Authorization: Bearer access_token"| RS`;
 
   const sequenceChart = `sequenceDiagram
-  participant User as Resource Owner
-  participant Client as Client public
-  participant AS as Authorization Server
-  participant RS as Resource Server
+  participant User as Resource Owner (ex.: you)
+  participant Client as Client public (ex.: Canva / Notion)
+  participant AS as AS (ex.: Google / GitHub)
+  participant RS as RS (ex.: Drive / GitHub API)
   User->>Client: Start login
   Note over Client: Generate code_verifier<br/>code_challenge = BASE64URL SHA256 verifier
   Client->>AS: GET /authorize + PKCE
@@ -275,8 +282,8 @@ export default function ArchitecturePage() {
     CC[code_challenge S256]
   end
   subgraph clients["Client types"]
-    PUB["Public Client<br/>PKCE · no secret in browser"]
-    CONF["Confidential Client<br/>client_secret on server only"]
+    PUB["Public Client<br/>PKCE · no secret in browser<br/><i>ex.: SPA, mobile app</i>"]
+    CONF["Confidential Client<br/>client_secret on server only<br/><i>ex.: backend API, Next.js server</i>"]
   end
   OP --> IDT
   CV --> CC
@@ -328,6 +335,9 @@ export default function ArchitecturePage() {
 
           <section className="mt-6">
             <h2>{p.flowTitle}</h2>
+            <p className="mb-2 text-[12px] text-[var(--text-muted)]">
+              {p.flowExamples}
+            </p>
             <div className="arch-mmd-wrap panel panel-pad">
               <MermaidDiagram chart={sequenceChart} />
             </div>

@@ -255,6 +255,101 @@ pre {
   border-radius: var(--radius);
 }
 
+.result-toast-stack {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: min(420px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.result-toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 8px 24px color-mix(in srgb, #000 28%, transparent);
+  animation: result-toast-in 180ms ease-out;
+}
+
+.result-toast-err {
+  border-color: var(--err-border);
+  background: var(--err-bg);
+  color: var(--err);
+}
+
+.result-toast-ok {
+  border-color: var(--ok-border);
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+
+.result-toast-info {
+  border-color: var(--info-border);
+  background: var(--info-bg);
+  color: var(--info);
+}
+
+.result-toast-body {
+  min-width: 0;
+  flex: 1;
+  text-align: left;
+}
+
+.result-toast-status {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.result-toast-reason {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: inherit;
+  opacity: 0.92;
+}
+
+.result-toast-close {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.result-toast-close:hover {
+  opacity: 1;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+@keyframes result-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .status-dot {
   display: inline-block;
   width: 6px;
@@ -1096,6 +1191,16 @@ body.arch-overlay-dragging {
   margin-top: 4px;
   font-size: 11px;
   color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.arch-flow-example {
+  display: block;
+  margin-top: 6px;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--accent);
   line-height: 1.35;
 }
 
