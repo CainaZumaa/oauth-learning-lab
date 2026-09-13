@@ -30,27 +30,27 @@ export function ArchitecturePanel({
       <div className="space-y-1">
         {nodes.map((n, i) => (
           <div key={n.label}>
-            <div className="flex items-center justify-between border border-[var(--border)] bg-[var(--surface-muted)] px-2.5 py-1.5">
+            <div className="flex items-center justify-between border border-(--border) bg-(--surface-muted) px-2.5 py-1.5">
               <div className="min-w-0 text-left">
-                <div className="font-mono text-[12px] font-medium text-[var(--text)]">
+                <div className="font-mono text-[12px] font-medium text-(--text)">
                   {n.label}
                 </div>
-                <div className="text-[11px] text-[var(--text-muted)]">{n.sub}</div>
+                <div className="text-[11px] text-(--text-muted)">{n.sub}</div>
               </div>
-              <div className="shrink-0 text-[11px] text-[var(--text-secondary)]">
+              <div className="shrink-0 text-[11px] text-(--text-secondary)">
                 <span className={`status-dot ${n.ok ? "" : "err"}`} />
                 {n.status}
               </div>
             </div>
             {i < nodes.length - 1 && (
-              <div className="pl-3 text-[11px] leading-4 text-[var(--text-muted)]">
+              <div className="pl-3 text-[11px] leading-4 text-(--text-muted)">
                 ↓
               </div>
             )}
           </div>
         ))}
       </div>
-      <p className="mt-2 text-left text-[11px] text-[var(--text-muted)]">
+      <p className="mt-2 text-left text-[11px] text-(--text-muted)">
         {a.oidcNote} {hasTokens ? a.yes : a.notYet}.
       </p>
     </section>

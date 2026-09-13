@@ -12,13 +12,13 @@ export default function DocsPage() {
       <AppHeader />
       <div className="flex-1 overflow-y-auto">
         <article className="docs-page mx-auto px-3 py-4 text-left">
-          <p className="text-[11px] font-medium text-[var(--text-muted)]">
+          <p className="text-[11px] font-medium text-(--text-muted)">
             {t.common.docs}
           </p>
-          <h1 className="text-[22px] font-semibold text-[var(--text)]">
+          <h1 className="text-[22px] font-semibold text-(--text)">
             {d.title}
           </h1>
-          <p className="mt-1 text-[13px] text-[var(--text-secondary)]">
+          <p className="mt-1 text-[13px] text-(--text-secondary)">
             {d.subtitle}
           </p>
 
@@ -68,14 +68,14 @@ export default function DocsPage() {
             <h2>{d.s2Title}</h2>
             <ul>
               <li>
-                <strong className="text-[var(--text)]">
+                <strong className="text-(--text)">
                   {t.header.normalFlow}
                 </strong>
                 {" — "}
                 {d.s2Normal}
               </li>
               <li>
-                <strong className="text-[var(--text)]">
+                <strong className="text-(--text)">
                   {t.header.securityLab}
                 </strong>
                 {" — "}

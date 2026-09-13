@@ -27,8 +27,8 @@ export function ObservabilityDock({
   const canClear = events.length > 0 || inspector.length > 0;
 
   return (
-    <aside className="observability-dock flex h-full min-h-0 w-full flex-col border-l border-[var(--border)] bg-[var(--surface)]">
-      <div className="flex shrink-0 items-center border-b border-[var(--border)]">
+    <aside className="observability-dock flex h-full min-h-0 w-full flex-col border-l border-(--border) bg-(--surface)">
+      <div className="flex shrink-0 items-center border-b border-(--border)">
         <div className="flex min-w-0 flex-1">
           <button
             type="button"
@@ -66,32 +66,32 @@ export function ObservabilityDock({
         {tab === "events" && (
           <div className="space-y-1.5 font-mono text-[11px]">
             {events.length === 0 && (
-              <p className="px-1 text-left text-[var(--text-muted)]">
+              <p className="px-1 text-left text-(--text-muted)">
                 {t.dock.noEvents}
               </p>
             )}
             {events.map((e) => (
               <div
                 key={e.id}
-                className="border border-[var(--border)] bg-[var(--surface-muted)] p-1.5 text-left"
+                className="border border-(--border) bg-(--surface-muted) p-1.5 text-left"
               >
                 <div className="flex flex-wrap items-baseline gap-1.5">
-                  <span className="text-[var(--text-muted)]">
+                  <span className="text-(--text-muted)">
                     [{new Date(e.timestamp).toLocaleTimeString()}]
                   </span>
-                  <span className="text-[var(--text-secondary)]">
+                  <span className="text-(--text-secondary)">
                     [{e.category}]
                   </span>
                   <span className={`badge ${statusClass[e.status] ?? ""}`}>
                     {e.status}
                   </span>
                 </div>
-                <div className="mt-0.5 text-[var(--text)]">{e.title}</div>
+                <div className="mt-0.5 text-(--text)">{e.title}</div>
                 {e.message && (
-                  <p className="mt-0.5 text-[var(--text-secondary)]">{e.message}</p>
+                  <p className="mt-0.5 text-(--text-secondary)">{e.message}</p>
                 )}
                 {e.details && (
-                  <pre className="mt-0.5 whitespace-pre-wrap break-all text-[var(--text-muted)]">
+                  <pre className="mt-0.5 whitespace-pre-wrap break-all text-(--text-muted)">
                     {Object.entries(e.details)
                       .map(
                         ([k, v]) =>
@@ -108,27 +108,27 @@ export function ObservabilityDock({
         {tab === "inspector" && (
           <div className="space-y-2">
             {inspector.length === 0 && (
-              <p className="px-1 text-left text-[12px] text-[var(--text-muted)]">
+              <p className="px-1 text-left text-[12px] text-(--text-muted)">
                 {t.dock.noExchanges}
               </p>
             )}
             {inspector.map((e) => (
               <details
                 key={e.id}
-                className="border border-[var(--border)] bg-[var(--bg)]"
+                className="border border-(--border) bg-(--bg)"
               >
-                <summary className="cursor-pointer px-2 py-1.5 text-left text-[12px] font-mono text-[var(--text)]">
+                <summary className="cursor-pointer px-2 py-1.5 text-left text-[12px] font-mono text-(--text)">
                   {e.label}
-                  <span className="ml-2 text-[var(--text-muted)]">
+                  <span className="ml-2 text-(--text-muted)">
                     {new Date(e.timestamp).toLocaleTimeString()}
                   </span>
                 </summary>
-                <div className="space-y-2 border-t border-[var(--border)] p-2">
+                <div className="space-y-2 border-t border-(--border) p-2">
                   <div className="text-left">
-                    <div className="mb-1 text-[11px] font-semibold text-[var(--text-secondary)]">
+                    <div className="mb-1 text-[11px] font-semibold text-(--text-secondary)">
                       {t.dock.request}
                     </div>
-                    <pre className="whitespace-pre-wrap break-all bg-[var(--surface-muted)] p-1.5 text-[11px] text-[var(--text)]">
+                    <pre className="whitespace-pre-wrap break-all bg-(--surface-muted) p-1.5 text-[11px] text-(--text)">
                       {`${e.request.method} ${e.request.url}
 ${
   e.request.query
@@ -146,10 +146,10 @@ ${
                     </pre>
                   </div>
                   <div className="text-left">
-                    <div className="mb-1 text-[11px] font-semibold text-[var(--text-secondary)]">
+                    <div className="mb-1 text-[11px] font-semibold text-(--text-secondary)">
                       {t.dock.response}
                     </div>
-                    <pre className="whitespace-pre-wrap break-all bg-[var(--surface-muted)] p-1.5 text-[11px] text-[var(--text)]">
+                    <pre className="whitespace-pre-wrap break-all bg-(--surface-muted) p-1.5 text-[11px] text-(--text)">
                       {`Status: ${e.response.status}${
                         e.response.statusText
                           ? ` ${e.response.statusText}`

@@ -207,18 +207,18 @@ export default function LabHomePage() {
               {apiDemo && (
                 <div className="panel grid gap-2 p-2 md:grid-cols-2">
                   <div className="min-w-0 text-left">
-                    <div className="mb-1 text-[11px] font-semibold text-[var(--text-secondary)]">
+                    <div className="mb-1 text-[11px] font-semibold text-(--text-secondary)">
                       {t.home.request}
                     </div>
-                    <pre className="whitespace-pre-wrap break-all bg-[var(--surface-muted)] p-1.5 font-mono text-[11px]">
+                    <pre className="whitespace-pre-wrap break-all bg-(--surface-muted) p-1.5 font-mono text-[11px]">
                       {apiDemo.request}
                     </pre>
                   </div>
                   <div className="min-w-0 text-left">
-                    <div className="mb-1 text-[11px] font-semibold text-[var(--text-secondary)]">
+                    <div className="mb-1 text-[11px] font-semibold text-(--text-secondary)">
                       {t.home.response}
                     </div>
-                    <pre className="whitespace-pre-wrap break-all bg-[var(--surface-muted)] p-1.5 font-mono text-[11px]">
+                    <pre className="whitespace-pre-wrap break-all bg-(--surface-muted) p-1.5 font-mono text-[11px]">
                       {apiDemo.response}
                     </pre>
                   </div>
@@ -244,14 +244,14 @@ export default function LabHomePage() {
               )}
 
               {mode === "normal" && (
-                <section className="panel panel-pad text-left text-[13px] text-[var(--text-secondary)]">
+                <section className="panel panel-pad text-left text-[13px] text-(--text-secondary)">
                   <h2 className="panel-title">{t.home.normalFlowTitle}</h2>
                   <ol className="list-decimal space-y-0.5 pl-4">
                     {t.home.normalSteps.map((step) => (
                       <li key={step}>{step}</li>
                     ))}
                   </ol>
-                  <p className="mt-2 text-[11px] text-[var(--text-muted)]">
+                  <p className="mt-2 text-[11px] text-(--text-muted)">
                     {t.home.diagramHint}
                   </p>
                 </section>
@@ -260,22 +260,22 @@ export default function LabHomePage() {
 
             <div className="space-y-3 lg:self-start">
               <ScopeSelector scopes={scopes} onChange={setScopes} />
-              <section className="panel panel-pad text-left text-[12px] text-[var(--text-secondary)]">
+              <section className="panel panel-pad text-left text-[12px] text-(--text-secondary)">
                 <h2 className="panel-title">{t.home.registeredClient}</h2>
                 <dl className="space-y-1 font-mono text-[11px]">
                   <div>
-                    <dt className="text-[var(--text-muted)]">client_id</dt>
-                    <dd className="text-[var(--text)]">
+                    <dt className="text-(--text-muted)">client_id</dt>
+                    <dd className="text-(--text)">
                       {LAB_CONFIG.registeredClient.client_id}
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-[var(--text-muted)]">type</dt>
-                    <dd className="text-[var(--text)]">{t.home.clientType}</dd>
+                    <dt className="text-(--text-muted)">type</dt>
+                    <dd className="text-(--text)">{t.home.clientType}</dd>
                   </div>
                   <div>
-                    <dt className="text-[var(--text-muted)]">redirect_uri</dt>
-                    <dd className="break-all text-[var(--text)]">
+                    <dt className="text-(--text-muted)">redirect_uri</dt>
+                    <dd className="break-all text-(--text)">
                       {LAB_CONFIG.registeredClient.redirect_uris[0]}
                     </dd>
                   </div>
@@ -292,7 +292,7 @@ export default function LabHomePage() {
         />
       </div>
 
-      <div className="h-[42vh] shrink-0 border-t border-[var(--border)] xl:hidden">
+      <div className="h-[42vh] shrink-0 border-t border-(--border) xl:hidden">
         <ObservabilityDock
           events={events}
           inspector={inspector}

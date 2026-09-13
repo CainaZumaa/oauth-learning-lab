@@ -37,7 +37,7 @@ export function ScopeSelector({
             >
               <input
                 type="checkbox"
-                className="mt-0.5 accent-[var(--accent)] disabled:cursor-not-allowed"
+                className="mt-0.5 accent-(--accent) disabled:cursor-not-allowed"
                 checked={checked}
                 disabled={locked}
                 onChange={() => toggle(s)}
@@ -47,15 +47,15 @@ export function ScopeSelector({
                 htmlFor={locked ? undefined : `scope-${s}`}
                 className={locked ? "cursor-default" : "cursor-pointer"}
               >
-                <span className="font-mono text-[12px] text-[var(--accent)]">
+                <span className="font-mono text-[12px] text-(--accent)">
                   {s}
                   {locked && (
-                    <span className="ml-1.5 font-sans text-[10px] font-normal text-[var(--text-muted)]">
+                    <span className="ml-1.5 font-sans text-[10px] font-normal text-(--text-muted)">
                       {t.common.required}
                     </span>
                   )}
                 </span>
-                <span className="mt-0.5 block text-[11px] text-[var(--text-muted)]">
+                <span className="mt-0.5 block text-[11px] text-(--text-muted)">
                   {SCOPE_DESCRIPTIONS[s]}
                   {locked ? t.scopes.lockedHint : ""}
                 </span>
@@ -64,7 +64,7 @@ export function ScopeSelector({
           );
         })}
       </ul>
-      <p className="mt-2 text-left text-[11px] text-[var(--text-muted)]">
+      <p className="mt-2 text-left text-[11px] text-(--text-muted)">
         {t.scopes.footer}
       </p>
     </section>

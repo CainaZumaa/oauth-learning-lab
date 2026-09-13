@@ -6,12 +6,12 @@ export function RequestInspectorPanel({ entries }: { entries: InspectorEntry[] }
   return (
     <section className="panel panel-pad">
       <h2 className="panel-title">Request Inspector</h2>
-      <p className="mb-2 text-left text-[11px] text-[var(--text-muted)]">
+      <p className="mb-2 text-left text-[11px] text-(--text-muted)">
         Request → response for each protocol step.
       </p>
-      <div className="max-h-[420px] space-y-2 overflow-auto">
+      <div className="max-h-105 space-y-2 overflow-auto">
         {entries.length === 0 && (
-          <p className="text-left text-[12px] text-[var(--text-muted)]">
+          <p className="text-left text-[12px] text-(--text-muted)">
             No exchanges yet.
           </p>
         )}
@@ -19,20 +19,20 @@ export function RequestInspectorPanel({ entries }: { entries: InspectorEntry[] }
           <details
             key={e.id}
             open
-            className="border border-[var(--border)] bg-[var(--surface)]"
+            className="border border-(--border) bg-(--surface)"
           >
-            <summary className="cursor-pointer px-2 py-1.5 text-left text-[12px] font-mono text-[var(--text)]">
+            <summary className="cursor-pointer px-2 py-1.5 text-left text-[12px] font-mono text-(--text)">
               {e.label}
-              <span className="ml-2 text-[var(--text-muted)]">
+              <span className="ml-2 text-(--text-muted)">
                 {new Date(e.timestamp).toLocaleTimeString()}
               </span>
             </summary>
-            <div className="grid gap-2 border-t border-[var(--border)] p-2 md:grid-cols-2">
+            <div className="grid gap-2 border-t border-(--border) p-2 md:grid-cols-2">
               <div className="text-left">
-                <div className="mb-1 text-[11px] font-semibold text-[var(--text-secondary)]">
+                <div className="mb-1 text-[11px] font-semibold text-(--text-secondary)">
                   REQUEST
                 </div>
-                <pre className="whitespace-pre-wrap break-all bg-[var(--surface-muted)] p-1.5 text-[11px] text-[var(--text)]">
+                <pre className="whitespace-pre-wrap break-all bg-(--surface-muted) p-1.5 text-[11px] text-(--text)">
                   {`${e.request.method} ${e.request.url}
 ${
   e.request.query
@@ -50,10 +50,10 @@ ${
                 </pre>
               </div>
               <div className="text-left">
-                <div className="mb-1 text-[11px] font-semibold text-[var(--text-secondary)]">
+                <div className="mb-1 text-[11px] font-semibold text-(--text-secondary)">
                   RESPONSE
                 </div>
-                <pre className="whitespace-pre-wrap break-all bg-[var(--surface-muted)] p-1.5 text-[11px] text-[var(--text)]">
+                <pre className="whitespace-pre-wrap break-all bg-(--surface-muted) p-1.5 text-[11px] text-(--text)">
                   {`Status: ${e.response.status}${
                     e.response.statusText ? ` ${e.response.statusText}` : ""
                   }

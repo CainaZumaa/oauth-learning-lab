@@ -49,28 +49,28 @@ function AuthorizeForm() {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--bg)]">
-      <div className="mx-auto grid max-w-[880px] gap-3 px-3 py-6 md:grid-cols-[1.2fr_0.8fr]">
+    <main className="min-h-screen bg-(--bg)">
+      <div className="mx-auto grid max-w-220 gap-3 px-3 py-6 md:grid-cols-[1.2fr_0.8fr]">
         <section className="panel panel-pad text-left">
-          <p className="text-[11px] font-medium text-[var(--text-muted)]">
+          <p className="text-[11px] font-medium text-(--text-muted)">
             {t.authorize.eyebrow}
           </p>
           <h1 className="mt-0.5 text-[18px] font-semibold">
             {t.authorize.title}
           </h1>
-          <p className="mt-1 text-[13px] text-[var(--text-secondary)]">
+          <p className="mt-1 text-[13px] text-(--text-secondary)">
             {t.authorize.subtitle}
           </p>
 
-          <div className="mt-3 space-y-1.5 border border-[var(--border)] bg-[var(--surface-muted)] p-2.5 text-[13px]">
+          <div className="mt-3 space-y-1.5 border border-(--border) bg-(--surface-muted) p-2.5 text-[13px]">
             <div>
-              <span className="text-[var(--text-muted)]">{t.authorize.user}</span>
-              <div className="font-mono text-[12px] text-[var(--text)]">
+              <span className="text-(--text-muted)">{t.authorize.user}</span>
+              <div className="font-mono text-[12px] text-(--text)">
                 {LAB_CONFIG.user.email}
               </div>
             </div>
             <div>
-              <span className="text-[var(--text-muted)]">
+              <span className="text-(--text-muted)">
                 {t.authorize.client}
               </span>
               <div className="font-mono text-[12px]">
@@ -78,17 +78,17 @@ function AuthorizeForm() {
               </div>
             </div>
             <div>
-              <span className="text-[var(--text-muted)]">redirect_uri</span>
+              <span className="text-(--text-muted)">redirect_uri</span>
               <div className="break-all font-mono text-[11px]">
                 {params.redirect_uri || "(missing)"}
               </div>
             </div>
             <div>
-              <span className="text-[var(--text-muted)]">scope</span>
+              <span className="text-(--text-muted)">scope</span>
               <div className="font-mono text-[11px]">{params.scope}</div>
             </div>
             <div>
-              <span className="text-[var(--text-muted)]">code_challenge</span>
+              <span className="text-(--text-muted)">code_challenge</span>
               <div className="break-all font-mono text-[11px]">
                 {params.code_challenge
                   ? `${params.code_challenge.slice(0, 40)}…`
@@ -98,7 +98,7 @@ function AuthorizeForm() {
           </div>
 
           {error && (
-            <div className="mt-2 rounded-[var(--radius)] border border-[var(--err-border)] bg-[var(--err-bg)] px-2.5 py-1.5 text-[12px] text-[var(--err)]">
+            <div className="mt-2 rounded-(--radius) border border-(--err-border) bg-(--err-bg) px-2.5 py-1.5 text-[12px] text-(--err)">
               REJECTED — {error}
             </div>
           )}
@@ -115,7 +115,7 @@ function AuthorizeForm() {
           </div>
         </section>
 
-        <aside className="panel panel-pad text-left text-[12px] text-[var(--text-secondary)]">
+        <aside className="panel panel-pad text-left text-[12px] text-(--text-secondary)">
           <h2 className="panel-title">{t.authorize.nextTitle}</h2>
           <ol className="list-decimal space-y-1 pl-4">
             {t.authorize.nextSteps.map((step) => (
@@ -132,7 +132,7 @@ export default function AuthorizePage() {
   return (
     <Suspense
       fallback={
-        <div className="p-4 text-[13px] text-[var(--text-muted)]">Loading…</div>
+        <div className="p-4 text-[13px] text-(--text-muted)">Loading…</div>
       }
     >
       <AuthorizeForm />

@@ -82,10 +82,10 @@ function CallbackInner() {
   }, [code, t.callback.noVerifier, t.callback.success]);
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[var(--bg)]">
-      <div className="mx-auto grid max-w-[880px] gap-3 px-3 py-6 md:grid-cols-[1.3fr_0.7fr]">
+    <main className="min-h-screen overflow-x-hidden bg-(--bg)">
+      <div className="mx-auto grid max-w-220 gap-3 px-3 py-6 md:grid-cols-[1.3fr_0.7fr]">
         <section className="panel panel-pad min-w-0 overflow-hidden text-left">
-          <p className="text-[11px] font-medium text-[var(--text-muted)]">
+          <p className="text-[11px] font-medium text-(--text-muted)">
             {t.callback.eyebrow}
           </p>
           <h1 className="mt-0.5 text-[18px] font-semibold">
@@ -93,13 +93,13 @@ function CallbackInner() {
           </h1>
 
           {error && (
-            <p className="mt-2 text-[13px] text-[var(--err)]">
+            <p className="mt-2 text-[13px] text-(--err)">
               {t.callback.authError} {error}
             </p>
           )}
 
           {!code && !error && (
-            <p className="mt-2 text-[13px] text-[var(--text-muted)]">
+            <p className="mt-2 text-[13px] text-(--text-muted)">
               {t.callback.noCode}
             </p>
           )}
@@ -107,10 +107,10 @@ function CallbackInner() {
           {code && (
             <div className="mt-3 min-w-0 space-y-2 text-[13px]">
               <div className="min-w-0">
-                <div className="text-[11px] text-[var(--text-muted)]">
+                <div className="text-[11px] text-(--text-muted)">
                   authorization_code
                 </div>
-                <code className="block break-all text-[12px] text-[var(--text)]">
+                <code className="block break-all text-[12px] text-(--text)">
                   {code}
                 </code>
               </div>
@@ -132,10 +132,10 @@ function CallbackInner() {
                 </span>
               </p>
               {message && (
-                <p className="text-[var(--text-secondary)]">{message}</p>
+                <p className="text-(--text-secondary)">{message}</p>
               )}
               {tokens && (
-                <pre className="max-h-56 max-w-full overflow-auto whitespace-pre-wrap break-all bg-[var(--surface-muted)] p-2 font-mono text-[11px]">
+                <pre className="max-h-56 max-w-full overflow-auto whitespace-pre-wrap break-all bg-(--surface-muted) p-2 font-mono text-[11px]">
                   {JSON.stringify(tokens, null, 2)}
                 </pre>
               )}
@@ -147,7 +147,7 @@ function CallbackInner() {
           </Link>
         </section>
 
-        <aside className="panel panel-pad min-w-0 text-left text-[12px] text-[var(--text-secondary)]">
+        <aside className="panel panel-pad min-w-0 text-left text-[12px] text-(--text-secondary)">
           <h2 className="panel-title">{t.callback.exchangeTitle}</h2>
           <p>{t.callback.exchangeBody}</p>
         </aside>
@@ -160,7 +160,7 @@ export default function CallbackPage() {
   return (
     <Suspense
       fallback={
-        <div className="p-4 text-[13px] text-[var(--text-muted)]">Loading…</div>
+        <div className="p-4 text-[13px] text-(--text-muted)">Loading…</div>
       }
     >
       <CallbackInner />

@@ -63,28 +63,28 @@ export function FlowValuesPanel({ flow }: { flow: FlowSnapshot }) {
   return (
     <section className="panel panel-pad">
       <h2 className="panel-title">{f.title}</h2>
-      <div className="max-h-[360px] space-y-1 overflow-auto">
+      <div className="max-h-90 space-y-1 overflow-auto">
         {FIELDS.map(({ key, hintEn, hintPt }) => {
           const value = flow[key];
           return (
             <details
               key={key}
-              className="border border-[var(--border)] bg-[var(--surface)]"
+              className="border border-(--border) bg-(--surface)"
             >
               <summary className="flex cursor-pointer items-center justify-between gap-2 px-2 py-1.5 text-left text-[12px]">
-                <span className="font-mono text-[var(--accent)]">{key}</span>
-                <span className="max-w-[55%] truncate text-[11px] text-[var(--text-muted)]">
+                <span className="font-mono text-(--accent)">{key}</span>
+                <span className="max-w-[55%] truncate text-[11px] text-(--text-muted)">
                   {value
                     ? String(value).slice(0, 32) +
                       (String(value).length > 32 ? "…" : "")
                     : "—"}
                 </span>
               </summary>
-              <div className="border-t border-[var(--border)] px-2 py-1.5 text-left text-[11px]">
-                <p className="mb-1 text-[var(--text-muted)]">
+              <div className="border-t border-(--border) px-2 py-1.5 text-left text-[11px]">
+                <p className="mb-1 text-(--text-muted)">
                   {locale === "pt" ? hintPt : hintEn}
                 </p>
-                <pre className="whitespace-pre-wrap break-all bg-[var(--surface-muted)] p-1.5 text-[var(--text)]">
+                <pre className="whitespace-pre-wrap break-all bg-(--surface-muted) p-1.5 text-(--text)">
                   {value ?? f.empty}
                 </pre>
               </div>
@@ -92,13 +92,13 @@ export function FlowValuesPanel({ flow }: { flow: FlowSnapshot }) {
           );
         })}
       </div>
-      <div className="mt-2 border-t border-[var(--border)] pt-2 text-left text-[11px] text-[var(--text-muted)]">
+      <div className="mt-2 border-t border-(--border) pt-2 text-left text-[11px] text-(--text-muted)">
         <p>
-          <span className="font-medium text-[var(--text-secondary)]">
+          <span className="font-medium text-(--text-secondary)">
             {f.idToken}
           </span>{" "}
           = {f.identity}.{" "}
-          <span className="font-medium text-[var(--text-secondary)]">
+          <span className="font-medium text-(--text-secondary)">
             {f.accessToken}
           </span>{" "}
           = {f.authorization}.

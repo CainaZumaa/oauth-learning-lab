@@ -564,7 +564,7 @@ export function SecurityTestsPanel({
     <section className="panel panel-pad text-left">
       <h2 className="panel-title">{t.security.title}</h2>
       {!enabled && (
-        <p className="mb-2 text-[12px] text-[var(--warn)]">
+        <p className="mb-2 text-[12px] text-(--warn)">
           {t.security.enableHint}
         </p>
       )}
@@ -572,10 +572,10 @@ export function SecurityTestsPanel({
         {TESTS.map((test) => (
           <div
             key={test.id}
-            className="border border-[var(--border)] bg-[var(--surface)] p-2.5"
+            className="border border-(--border) bg-(--surface) p-2.5"
           >
             <div className="mb-1.5 flex flex-wrap items-start justify-between gap-2">
-              <h3 className="text-[13px] font-semibold text-[var(--text)]">
+              <h3 className="text-[13px] font-semibold text-(--text)">
                 {test.title}
               </h3>
               <button
@@ -591,30 +591,30 @@ export function SecurityTestsPanel({
                 {t.security.runTest}
               </button>
             </div>
-            <dl className="space-y-0.5 text-[12px] text-[var(--text-secondary)]">
+            <dl className="space-y-0.5 text-[12px] text-(--text-secondary)">
               <div>
-                <dt className="inline text-[var(--text-muted)]">
+                <dt className="inline text-(--text-muted)">
                   {t.security.what}{" "}
                 </dt>
                 <dd className="inline">{test.what}</dd>
               </div>
               <div>
-                <dt className="inline text-[var(--text-muted)]">
+                <dt className="inline text-(--text-muted)">
                   {t.security.why}{" "}
                 </dt>
                 <dd className="inline">{test.why}</dd>
               </div>
               <div>
-                <dt className="inline text-[var(--text-muted)]">
+                <dt className="inline text-(--text-muted)">
                   {t.security.ifAccepted}{" "}
                 </dt>
                 <dd className="inline">{test.ifAccepted}</dd>
               </div>
               <div>
-                <dt className="inline text-[var(--text-muted)]">
+                <dt className="inline text-(--text-muted)">
                   {t.security.control}{" "}
                 </dt>
-                <dd className="inline font-medium text-[var(--accent)]">
+                <dd className="inline font-medium text-(--accent)">
                   {test.control}
                 </dd>
               </div>

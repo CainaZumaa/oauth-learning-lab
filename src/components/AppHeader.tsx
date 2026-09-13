@@ -24,21 +24,21 @@ export function AppHeader({
   const showLabControls = onLab && Boolean(onModeChange && onReset);
 
   return (
-    <header className="shrink-0 border-b border-[var(--border)] bg-[var(--surface)]">
+    <header className="shrink-0 border-b border-(--border) bg-(--surface)">
       <div className="flex items-start justify-between gap-4 px-3 py-2.5">
         <div className="flex min-w-0 items-start gap-2 text-left">
           <HamburgerMenu />
           <div className="min-w-0">
-            <p className="text-[11px] font-medium text-[var(--text-muted)]">
+            <p className="text-[11px] font-medium text-(--text-muted)">
               {t.header.eyebrow}
             </p>
-            <h1 className="text-[18px] font-semibold leading-tight text-[var(--text)]">
-              <Link href="/" className="text-[var(--text)] no-underline">
+            <h1 className="text-[18px] font-semibold leading-tight text-(--text)">
+              <Link href="/" className="text-(--text) no-underline">
                 {t.header.title}
               </Link>
             </h1>
             {onLab && (
-              <p className="mt-0.5 max-w-xl text-[12px] text-[var(--text-secondary)]">
+              <p className="mt-0.5 max-w-xl text-[12px] text-(--text-secondary)">
                 {t.header.subtitle}
               </p>
             )}

@@ -11,6 +11,62 @@ type Hotspot = {
   body: string;
 };
 
+function RoleBox({
+  id,
+  title,
+  sub,
+  example,
+  active,
+  onActivate,
+}: {
+  id: string;
+  title: string;
+  sub: string;
+  example: string;
+  active: string;
+  onActivate: (id: string) => void;
+}) {
+  return (
+    <button
+      type="button"
+      className={`arch-flow-box ${active === id ? "is-active" : ""}`}
+      onMouseEnter={() => onActivate(id)}
+      onFocus={() => onActivate(id)}
+    >
+      <strong>{title}</strong>
+      <span>{sub}</span>
+      <em className="arch-flow-example">{example}</em>
+    </button>
+  );
+}
+
+function RoleEdge({
+  id,
+  label,
+  active,
+  onActivate,
+}: {
+  id: string;
+  label: string;
+  active: string;
+  onActivate: (id: string) => void;
+}) {
+  return (
+    <button
+      type="button"
+      className={`arch-flow-edge ${active === id ? "is-active" : ""}`}
+      onMouseEnter={() => onActivate(id)}
+      onFocus={() => onActivate(id)}
+    >
+      <span className="arch-flow-edge-line" aria-hidden />
+      <span className="arch-flow-edge-label">{label}</span>
+      <span className="arch-flow-edge-arrow" aria-hidden>
+        ↓
+      </span>
+    </button>
+  );
+}
+
 function InteractiveRoles({
   hotspots,
   hint,
@@ -21,100 +77,85 @@ function InteractiveRoles({
   const [active, setActive] = useState<string>("client");
   const current = hotspots.find((h) => h.id === active) ?? hotspots[0];
 
-  function Box({
-    id,
-    title,
-    sub,
-    example,
-  }: {
-    id: string;
-    title: string;
-    sub: string;
-    example: string;
-  }) {
-    return (
-      <button
-        type="button"
-        className={`arch-flow-box ${active === id ? "is-active" : ""}`}
-        onMouseEnter={() => setActive(id)}
-        onFocus={() => setActive(id)}
-      >
-        <strong>{title}</strong>
-        <span>{sub}</span>
-        <em className="arch-flow-example">{example}</em>
-      </button>
-    );
-  }
-
-  function Edge({
-    id,
-    label,
-  }: {
-    id: string;
-    label: string;
-  }) {
-    return (
-      <button
-        type="button"
-        className={`arch-flow-edge ${active === id ? "is-active" : ""}`}
-        onMouseEnter={() => setActive(id)}
-        onFocus={() => setActive(id)}
-      >
-        <span className="arch-flow-edge-line" aria-hidden />
-        <span className="arch-flow-edge-label">{label}</span>
-        <span className="arch-flow-edge-arrow" aria-hidden>
-          ↓
-        </span>
-      </button>
-    );
-  }
-
   return (
     <div className="arch-interactive">
       <div className="arch-flow" aria-label="OAuth roles diagram">
         <div className="arch-flow-pair">
-          <Box
+          <RoleBox
             id="ro"
             title="Resource Owner"
             sub="User · alice@example.local"
             example="ex.: you authorizing an app"
+            active={active}
+            onActivate={setActive}
           />
-          <Box
+          <RoleBox
             id="client"
             title="Client"
             sub="Public + PKCE · lab-client · /callback"
             example="ex.: SPA / mobile app (Canva, Notion)"
+            active={active}
+            onActivate={setActive}
           />
         </div>
 
-        <Edge id="edge-authorize" label="1 · Client → AS · authorize + PKCE" />
+        <RoleEdge
+          id="edge-authorize"
+          label="1 · Client → AS · authorize + PKCE"
+          active={active}
+          onActivate={setActive}
+        />
 
-        <Box
+        <RoleBox
           id="as"
           title="Authorization Server (AS)"
           sub="Identity Provider · /authorize · /token"
           example="ex.: Google Accounts, GitHub, Auth0"
+          active={active}
+          onActivate={setActive}
         />
 
-        <Edge id="edge-consent" label="2 · Resource Owner · consent / login" />
-        <Edge id="edge-code" label="3 · AS → Client · authorization_code" />
-        <Edge id="edge-token" label="4 · Client → AS · code + code_verifier" />
-        <Edge id="edge-api" label="5 · Client → RS · Bearer access_token" />
+        <RoleEdge
+          id="edge-consent"
+          label="2 · Resource Owner · consent / login"
+          active={active}
+          onActivate={setActive}
+        />
+        <RoleEdge
+          id="edge-code"
+          label="3 · AS → Client · authorization_code"
+          active={active}
+          onActivate={setActive}
+        />
+        <RoleEdge
+          id="edge-token"
+          label="4 · Client → AS · code + code_verifier"
+          active={active}
+          onActivate={setActive}
+        />
+        <RoleEdge
+          id="edge-api"
+          label="5 · Client → RS · Bearer access_token"
+          active={active}
+          onActivate={setActive}
+        />
 
-        <Box
+        <RoleBox
           id="rs"
           title="Resource Server (RS)"
           sub="Protected API · GET /api/profile"
           example="ex.: Google Drive API, GitHub API"
+          active={active}
+          onActivate={setActive}
         />
       </div>
 
       <aside className="arch-interactive-detail panel panel-pad">
-        <p className="text-[11px] text-[var(--text-muted)]">{hint}</p>
-        <h3 className="mt-1 text-[14px] font-semibold text-[var(--text)]">
+        <p className="text-[11px] text-(--text-muted)">{hint}</p>
+        <h3 className="mt-1 text-[14px] font-semibold text-(--text)">
           {current.title}
         </h3>
-        <p className="mt-2 text-[13px] text-[var(--text-secondary)]">
+        <p className="mt-2 text-[13px] text-(--text-secondary)">
           {current.body}
         </p>
       </aside>
@@ -307,20 +348,20 @@ export default function ArchitecturePage() {
       <AppHeader />
       <div className="flex-1 overflow-y-auto">
         <article className="arch-page mx-auto px-3 py-4 text-left">
-          <p className="text-[11px] font-medium text-[var(--text-muted)]">
+          <p className="text-[11px] font-medium text-(--text-muted)">
             {t.common.architecture}
           </p>
-          <h1 className="text-[22px] font-semibold text-[var(--text)]">
+          <h1 className="text-[22px] font-semibold text-(--text)">
             {p.title}
           </h1>
-          <p className="mt-1 text-[13px] text-[var(--text-secondary)]">
+          <p className="mt-1 text-[13px] text-(--text-secondary)">
             {p.subtitle}
           </p>
           <div className="banner mt-3">{p.notice}</div>
 
           <section className="mt-5">
             <h2>{p.rolesTitle}</h2>
-            <p className="mb-3 text-[13px] text-[var(--text-secondary)]">
+            <p className="mb-3 text-[13px] text-(--text-secondary)">
               {p.rolesOidc}
             </p>
             <InteractiveRoles hotspots={hotspots} hint={p.hoverHint} />
@@ -335,7 +376,7 @@ export default function ArchitecturePage() {
 
           <section className="mt-6">
             <h2>{p.flowTitle}</h2>
-            <p className="mb-2 text-[12px] text-[var(--text-muted)]">
+            <p className="mb-2 text-[12px] text-(--text-muted)">
               {p.flowExamples}
             </p>
             <div className="arch-mmd-wrap panel panel-pad">
@@ -375,14 +416,14 @@ export default function ArchitecturePage() {
           <section className="mt-6 mb-8">
             <h2>{p.clientsTitle}</h2>
             <div className="mt-2 grid gap-3 md:grid-cols-2">
-              <div className="panel panel-pad text-[13px] text-[var(--text-secondary)]">
+              <div className="panel panel-pad text-[13px] text-(--text-secondary)">
                 {p.publicClient}
               </div>
-              <div className="panel panel-pad text-[13px] text-[var(--text-secondary)]">
+              <div className="panel panel-pad text-[13px] text-(--text-secondary)">
                 {p.confidentialClient}
               </div>
             </div>
-            <p className="mt-3 text-[11px] text-[var(--text-muted)]">
+            <p className="mt-3 text-[11px] text-(--text-muted)">
               {p.fileHint}
             </p>
           </section>
