@@ -398,7 +398,7 @@ export default function ArchitecturePage() {
             </div>
           </section>
 
-          <section className="mt-6 grid gap-3 md:grid-cols-2">
+          <section className="mt-6 grid gap-5">
             <div>
               <h2>{p.singleUseTitle}</h2>
               <div className="arch-mmd-wrap panel panel-pad mt-2">
