@@ -91,7 +91,12 @@ const pt: Dictionary = {
   },
   scopes: {
     title: "Scopes",
-    lockedHint: " — travado aqui para o lab sempre mostrar OIDC / id_token.",
+    openid: "Scope de identidade OIDC. Permite emitir ID Token.",
+    profile: "Informações básicas de perfil (nome).",
+    email: "Acesso à claim de email do usuário.",
+    offline_access:
+      "Acesso offline/refresh. Quando concedido, um refresh_token pode ser emitido (depende da implementação).",
+    lockedHint: " Travado aqui para o lab sempre mostrar OIDC / id_token.",
     footer:
       "Access Token expira sozinho. Refresh exige offline_access na política deste lab.",
   },

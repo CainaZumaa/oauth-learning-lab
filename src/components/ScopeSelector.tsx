@@ -1,6 +1,6 @@
 "use client";
 
-import { SCOPE_DESCRIPTIONS, type Scope } from "@/lib/config";
+import { type Scope } from "@/lib/config";
 import { useI18n } from "@/i18n/I18nProvider";
 
 const ALL: Scope[] = ["openid", "profile", "email", "offline_access"];
@@ -56,7 +56,7 @@ export function ScopeSelector({
                   )}
                 </span>
                 <span className="mt-0.5 block text-[11px] text-(--text-muted)">
-                  {SCOPE_DESCRIPTIONS[s]}
+                  {t.scopes[s]}
                   {locked ? t.scopes.lockedHint : ""}
                 </span>
               </label>

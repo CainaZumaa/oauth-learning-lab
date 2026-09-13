@@ -89,7 +89,12 @@ const en = {
   },
   scopes: {
     title: "Scopes",
-    lockedHint: " — locked here so the lab always shows OIDC / id_token.",
+    openid: "OIDC identity scope. Enables ID Token issuance.",
+    profile: "Basic profile information (name).",
+    email: "Access to the user email claim.",
+    offline_access:
+      "Offline/refresh access. When granted, a refresh_token may be issued (implementation-dependent).",
+    lockedHint: " Locked here so the lab always shows OIDC / id_token.",
     footer:
       "Access Token expires on its own. Refresh requires offline_access in this lab's policy.",
   },

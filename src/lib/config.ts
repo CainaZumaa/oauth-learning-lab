@@ -24,11 +24,3 @@ export const LAB_CONFIG = {
 };
 
 export type Scope = "openid" | "profile" | "email" | "offline_access";
-
-export const SCOPE_DESCRIPTIONS: Record<Scope, string> = {
-  openid: "OIDC identity scope — enables ID Token issuance",
-  profile: "Basic profile information (name)",
-  email: "Access to the user email claim",
-  offline_access:
-    "Authorization for offline/refresh access — when granted, a refresh_token may be issued (implementation-dependent)",
-};
