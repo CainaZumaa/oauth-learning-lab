@@ -92,6 +92,12 @@ const pt: Dictionary = {
     copy: "Copiar",
     copied: "Copiado",
     close: "Fechar",
+    rawValue: "Valor bruto",
+    decodedChallenge:
+      "Base64URL decodificado (digest SHA-256 em hex). Não dá para voltar ao code_verifier.",
+    decodedVerifier:
+      "Base64URL decodificado (bytes aleatórios em hex). É o segredo que vira o code_challenge via SHA-256.",
+    decodedJwt: "JWT decodificado (header + payload)",
   },
   scopes: {
     title: "Scopes",

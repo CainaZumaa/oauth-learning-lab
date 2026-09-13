@@ -27,13 +27,17 @@ const FIELDS: { key: keyof FlowSnapshot; hintEn: string; hintPt: string }[] = [
   },
   {
     key: "code_challenge",
-    hintEn: "BASE64URL(SHA256(code_verifier))",
-    hintPt: "BASE64URL(SHA256(code_verifier))",
+    hintEn:
+      "BASE64URL(SHA256(code_verifier)). One-way hash: cannot recover the verifier.",
+    hintPt:
+      "BASE64URL(SHA256(code_verifier)). Hash unidirecional: não dá para recuperar o verifier.",
   },
   {
     key: "code_verifier",
-    hintEn: "Secret kept by Client (PKCE)",
-    hintPt: "Segredo guardado pelo Client (PKCE)",
+    hintEn:
+      "High-entropy secret kept by the Client. Base64URL of random bytes (PKCE).",
+    hintPt:
+      "Segredo de alta entropia guardado pelo Client. Base64URL de bytes aleatórios (PKCE).",
   },
   {
     key: "authorization_code",
@@ -42,8 +46,9 @@ const FIELDS: { key: keyof FlowSnapshot; hintEn: string; hintPt: string }[] = [
   },
   {
     key: "access_token",
-    hintEn: "Authorization to call APIs",
-    hintPt: "Autorização para chamar APIs",
+    hintEn: "JWT used to call APIs (Bearer). Payload below is decoded for learning.",
+    hintPt:
+      "JWT para chamar APIs (Bearer). O payload abaixo é decodificado só para estudo.",
   },
   {
     key: "refresh_token",
@@ -52,8 +57,9 @@ const FIELDS: { key: keyof FlowSnapshot; hintEn: string; hintPt: string }[] = [
   },
   {
     key: "id_token",
-    hintEn: "OIDC identity (not for API auth)",
-    hintPt: "Identidade OIDC (não usar na API)",
+    hintEn: "OIDC identity JWT (not for API auth). Payload decoded for learning.",
+    hintPt:
+      "JWT de identidade OIDC (não usar na API). Payload decodificado só para estudo.",
   },
 ];
 
@@ -70,6 +76,73 @@ const MODAL_KEYS = new Set<keyof FlowSnapshot>([
 function preview(value: string | null) {
   if (!value) return "—";
   return value.length > 32 ? `${value.slice(0, 32)}…` : value;
+}
+
+function base64UrlToBytes(input: string): Uint8Array | null {
+  try {
+    const padded = input.replace(/-/g, "+").replace(/_/g, "/");
+    const pad = padded.length % 4 === 0 ? "" : "=".repeat(4 - (padded.length % 4));
+    const binary = atob(padded + pad);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+    return bytes;
+  } catch {
+    return null;
+  }
+}
+
+function bytesToHex(bytes: Uint8Array): string {
+  return [...bytes].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+function decodeJwtPart(part: string): unknown | null {
+  const bytes = base64UrlToBytes(part);
+  if (!bytes) return null;
+  try {
+    return JSON.parse(new TextDecoder().decode(bytes));
+  } catch {
+    return null;
+  }
+}
+
+function decodeFlowValue(
+  key: keyof FlowSnapshot,
+  value: string
+): {
+  labelKey: "decodedChallenge" | "decodedVerifier" | "decodedJwt";
+  text: string;
+} | null {
+  if (key === "code_challenge") {
+    const bytes = base64UrlToBytes(value);
+    if (!bytes || bytes.length === 0) return null;
+    return {
+      labelKey: "decodedChallenge",
+      text: bytesToHex(bytes),
+    };
+  }
+
+  if (key === "code_verifier") {
+    const bytes = base64UrlToBytes(value);
+    if (!bytes || bytes.length === 0) return null;
+    return {
+      labelKey: "decodedVerifier",
+      text: bytesToHex(bytes),
+    };
+  }
+
+  if (key === "access_token" || key === "id_token") {
+    const parts = value.split(".");
+    if (parts.length < 2) return null;
+    const header = decodeJwtPart(parts[0]);
+    const payload = decodeJwtPart(parts[1]);
+    if (!header && !payload) return null;
+    return {
+      labelKey: "decodedJwt",
+      text: JSON.stringify({ header, payload }, null, 2),
+    };
+  }
+
+  return null;
 }
 
 export function FlowValuesPanel({ flow }: { flow: FlowSnapshot }) {
@@ -107,6 +180,8 @@ export function FlowValuesPanel({ flow }: { flow: FlowSnapshot }) {
       setCopied(false);
     }
   }
+
+  const decoded = modal ? decodeFlowValue(modal.key, modal.value) : null;
 
   return (
     <section className="panel panel-pad">
@@ -203,7 +278,18 @@ export function FlowValuesPanel({ flow }: { flow: FlowSnapshot }) {
             <p className="mb-2 text-left text-[11px] text-(--text-muted)">
               {modal.hint}
             </p>
+            <p className="mb-1 text-left text-[11px] font-semibold text-(--text-secondary)">
+              {f.rawValue}
+            </p>
             <pre className="flow-modal-value">{modal.value}</pre>
+            {decoded && (
+              <>
+                <p className="mb-1 mt-3 text-left text-[11px] font-semibold text-(--text-secondary)">
+                  {f[decoded.labelKey]}
+                </p>
+                <pre className="flow-modal-value">{decoded.text}</pre>
+              </>
+            )}
             <div className="mt-3 flex justify-end gap-1.5">
               <button
                 type="button"

@@ -2,6 +2,11 @@
 
 import { useEffect } from "react";
 import type { TestResult } from "@/components/SecurityTestsPanel";
+import { useI18n } from "@/i18n/I18nProvider";
+import {
+  translateToastReason,
+  translateToastStatus,
+} from "@/i18n/toastReasons";
 
 export function ResultToast({
   result,
@@ -10,6 +15,8 @@ export function ResultToast({
   result: TestResult;
   onDismiss: () => void;
 }) {
+  const { locale, t } = useI18n();
+
   useEffect(() => {
     if (!result) return;
     const id = window.setTimeout(() => onDismiss(), 7000);
@@ -29,13 +36,17 @@ export function ResultToast({
     <div className="result-toast-stack" aria-live="polite">
       <div className={`result-toast result-toast-${tone}`} role="status">
         <div className="result-toast-body">
-          <span className="result-toast-status">{result.status}</span>
-          <span className="result-toast-reason">{result.reason}</span>
+          <span className="result-toast-status">
+            {translateToastStatus(locale, result.status)}
+          </span>
+          <span className="result-toast-reason">
+            {translateToastReason(locale, result.reason)}
+          </span>
         </div>
         <button
           type="button"
           className="result-toast-close"
-          aria-label="Dismiss"
+          aria-label={t.flow.close}
           onClick={onDismiss}
         >
           ×

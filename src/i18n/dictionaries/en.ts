@@ -90,6 +90,12 @@ const en = {
     copy: "Copy",
     copied: "Copied",
     close: "Close",
+    rawValue: "Raw value",
+    decodedChallenge:
+      "Base64URL decoded (SHA-256 digest, hex). Cannot reverse to code_verifier.",
+    decodedVerifier:
+      "Base64URL decoded (random bytes, hex). This is the secret hashed into code_challenge.",
+    decodedJwt: "Decoded JWT (header + payload)",
   },
   scopes: {
     title: "Scopes",
